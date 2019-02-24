@@ -121,14 +121,15 @@
         <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
             <aside id="tg-sidebar" class="tg-sidebar">
                 <div class="tg-widgetprofile">
-                    <figure class="tg-profilebannerimg">
-                        <img src="images/img-02.jpg" alt="image description">
-                    </figure>
                     <div class="tg-widgetcontent">
                         <figure>
-                            <img src="images/thumbnails/img-07.jpg" alt="image description">
-                            <a class="tg-btnedite" href="javascript:void(0);"><i class="lnr lnr-pencil"></i></a>
+                            {% if app.user.url=="" %}
+                                <img src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" alt="image description">
+                            {% else  %}
+                                <img src="{{ asset('') }}{{ vich_uploader_asset(app.user, 'imageFile') }}" alt="image description">
+                            {% endif %}
                         </figure>
+
                         <div class="tg-admininfo">
                             <h3>Kena Maresca</h3>
                             <h4>Bright Future Group &amp; Company</h4>
@@ -291,13 +292,13 @@
                     <p class="panel-body">
                 {% for r in recent %}
                     <p>
-
                     <div class="pull-left">
                         <a href="#">
-                            <p><img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="50px" height="50px" style="margin-right:5px; margin-top:-5px;"></p>
+                            <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="50px" height="50px" style="margin-right:5px; margin-top:-5px;">
                         </a>
                     </div>
-                    <h4><a style="text-decoration:none;"><strong>{{ r.user.nom ~" "~ r.user.prenom }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i>{{ r.datePublication|date }}</i></a></small></small></h4>
+                <hr>
+                    <h4><a style="text-decoration:none;" href="{{ path('autreprofile',{'id':r.user.id}) }}"><strong>{{ r.user.nom ~" "~ r.user.prenom }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i>{{ r.datePublication|date }}</i></a></small></small></h4>
                     <div class="post-content">
                         <hr>
                         <h4><p>{{ r.contenu|raw }}</p></h4>
@@ -305,10 +306,10 @@
                         <img class="img-responsive" src="{{ asset('images/' ~ r.image) }}" width="50%" height="50%">
                         {% endif %}
                         <h4> Tags:</h4>
+                        <hr>
                         {% for tag in r.tag %}
                         <a href="{{ path('showPost') }}?tag={{ tag }}" class="tagg">#{{ tag }}</a>
                         {% endfor %}
-
                     </div>
                 <a href="{{ path('updatePost',{'idp':r.id}) }}"> <img style="height: 0.5cm;width: 0.5cm" src="http://www.iconarchive.com/download/i60504/custom-icon-design/pretty-office-9/edit-validated.ico">Edit post
                     </p>

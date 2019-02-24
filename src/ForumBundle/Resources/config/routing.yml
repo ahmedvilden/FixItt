@@ -1,3 +1,12 @@
 forum_homepage:
     path:     /
     defaults: { _controller: ForumBundle:Default:index }
+createTopic:
+    path:     /newTopic
+    defaults: { _controller: ForumBundle:Forum:create }
+readTopic:
+    path:     /readTopic
+    defaults: { _controller: ForumBundle:Forum:readTopic }
+forum_commentaire:
+    path:     /forum/post/commentaire/{id}/{iduser}
+    defaults: { _controller: ForumBundle:Forum:readcomment }

@@ -18,6 +18,11 @@
     <link href="{{ asset('back/nprogress.css') }}" rel="stylesheet" />
     <!-- iCheck -->
     <link href="{{ asset('back/green.css') }}" rel="stylesheet" />
+    <link href="{{ asset('back/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/buttons.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/fixedHeader.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/responsive.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/scroller.bootstrap.min.css') }}" rel="stylesheet">
 
 
     <!-- bootstrap-progressbar -->
@@ -30,6 +35,14 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('back/custom.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('bundles/event/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/event/css/util.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/event/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/event/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/event/css/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/event/css/select2.min.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('bundles/event/images/favicon.ico') }}"/>
+    {% block css %}{% endblock %}
 
 </head>
 
@@ -283,8 +296,10 @@
             <!-- top tiles -->
 
             <!-- /top tiles -->
+{% block content %}
 
-            Bienvenue à l'interface Admin
+            {% endblock %}
+
             </div>
         <!-- /page content -->
 
@@ -340,6 +355,25 @@
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('back/custom.min.js')}}"></script>
 <script src="../build/js/custom.min.js"></script>
+<script src="{{ asset('bundles/event/js/main.js') }}"></script>
+<script src="{{ asset('bundles/event/js/select2.min.js') }}"></script>
+<script src="{{ asset('bundles/event/js/perfect-scrollbar.min.js') }}"></script>
 
+<script src="{{ asset('back/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('back/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('back/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('back/buttons.bootstrap.min.js') }}"></script>
+<script src="{{ asset('back/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('back/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('back/buttons.print.min.js') }}"></script>
+<script src="{{ asset('back/dataTables.fixedHeader.min.js') }}"></script>
+<script src="{{ asset('back/dataTables.keyTable.min.js') }}"></script>
+<script src="{{ asset('back/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('back/responsive.bootstrap.js') }}"></script>
+<script src="{{ asset('back/dataTables.scroller.min.js') }}"></script>
+<script src="{{ asset('back/jszip.min.js') }}"></script>
+<script src="{{ asset('back/pdfmake.min.js') }}"></script>
+<script src="{{ asset('back/vfs_fonts.js') }}"></script>
+{% block js %} {% endblock %}
 </body>
 </html>

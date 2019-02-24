@@ -16,7 +16,7 @@
                             </figure>
                             <div class="tg-admininfo">
                                 <h3>{{curr_user.prenom ~" "~ curr_user.nom }}</h3>
-                                <h4>Bright Future Group &amp; Company</h4>
+                                <h4>{{ curr_user.occupation }}</h4>
                                 <ul class="tg-matadata">
                                     <li><span class="tg-stars"><span></span></span></li>
                                     <li>
@@ -193,25 +193,27 @@
                                 <span><strong>Error Message:</strong> Adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim minimati</span>
                             </div>
                         </div>
+                        {% if curr_user.salarie == 1 %}
                         <div class="tg-alertmessages tg-ceomessage">
                             <div class="alert alert-danger tg-alertmessage fade in">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close"><em class="lnr lnr-cross"></em></a>
                                 <h2>Greetings &amp; Welcome!</h2>
-                                <span>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore mana aliqua enim adiata mini veniata quis nostrud exercitation ullamco laboris nisi ut aliquip extea commodo.</span>
+                                <span>This user is trusted by FixIt community, don't hesitate to hire him for your services</span>
                                 <div class="tg-ceobottom">
                                     <div class="tg-ceocontent">
                                         <figure>
-                                            <img src={{ asset('images/ceo-img.jpg') }} alt="image description">
+                                            <img src="{{ asset('images/ceo-img.jpg') }}" alt="image description">
                                         </figure>
                                         <div class="tg-ceoinfo">
                                             <span>Regards,</span>
-                                            <span>Arden Hockenberry (C.E.O)</span>
+                                            <span>FixIt Community</span>
                                         </div>
                                     </div>
-                                    <strong class="tg-logo"><img src={{ asset('images/slogo.png') }} alt="image description"></strong>
+                                    <strong class="tg-logo"><img src="{{ asset('images/slogo.png') }}" alt="image description"></strong>
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         <div class="tg-dashboardnotifications">
                             <div class="tg-dashboardnotificationholder">
                                 <div class="tg-dashboardnotofication tg-totaljobs">

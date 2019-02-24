@@ -3,13 +3,16 @@
 
 namespace UserBundle\Entity;
 
+use Symfony\Component\HttpFoundation\File\File;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  * @ORM\Table(name="user")
+ * @Vich\Uploadable
  */
 class User extends BaseUser
 {
@@ -37,6 +40,12 @@ class User extends BaseUser
      *
      */
     private $age;
+
+    /**
+     * @ORM\Column(type="integer",nullable=true)
+     *
+     */
+    private $salarie;
 
     /**
      * @ORM\Column(type="string")
@@ -82,6 +91,7 @@ class User extends BaseUser
     {
         return $this->adresse;
     }
+
     /*
     /**
      * @return mixed
@@ -139,7 +149,6 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->setImage("");
         $this->setApropos("");
     }
 
@@ -156,6 +165,13 @@ class User extends BaseUser
 
         return $this;
     }
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="occupation", type="string" , length=255,nullable=true)
+     */
+    public $occupation;
 
     /**
      * Get inscriptiondate
@@ -214,36 +230,7 @@ class User extends BaseUser
     {
         return $this->prenom;
     }
-    /**
-     * @var string
-     * @Assert\File(
-     *      maxSize="5242880",
-     *      mimeTypes = {
-     *          "image/png",
-     *          "image/jpeg",
-     *          "image/jpg",
-     *          "image/gif"
-     *      }
-     * )
-     * @ORM\Column(name="image", type="text",nullable=true)
-     */
-    private $image;
 
-    /**
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param string $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
     /**
      * @var string
      *
@@ -265,4 +252,95 @@ class User extends BaseUser
         $this->apropos = $apropos;
     }
 
+    /**
+     * @return string
+     */
+    public function getOccupation()
+    {
+        return $this->occupation;
+    }
+
+    /**
+     * @param string $occupation
+     */
+    public function setOccupation($occupation)
+    {
+        $this->occupation = $occupation;
+    }
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $url
+     */
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            $this->datePublication = new \DateTime('now');
+        }
+    }
+
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     *
+     * @return User
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", length=255,nullable=true)
+     */
+    private $url;
+
+    /**
+     * @Vich\UploadableField(mapping="profil_images", fileNameProperty="url")
+     * @var File
+     */
+    private $imageFile;
+    /**
+     * Set salarie
+     *
+     * @param int $salarie
+     *
+     * @return User
+     */
+    public function setSalarie($salarie)
+    {
+        $this->salarie= $salarie;
+
+        return $this;
+    }
+
+    /**
+     * Get salarie
+     *
+     * @return string
+     */
+    public function getSalarie()
+    {
+        return $this->salarie;
+    }
 }

@@ -15,9 +15,12 @@ class DefaultController extends Controller
 
 
 
+    public function getParent(){
+        return 'FOSUserBundle';
+    }
 
     /**
-     * @Route("/user/login", name="homepage")
+     * @Route("/login", name="homepage")
      */
     public function loggedAction()
     {
@@ -40,17 +43,16 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/login", name="homepage")
+     * @Route("user/login", name="homepage")
      */
     public function redirectAction()
     {
 
 
             if (in_array("ROLE_SUPER_ADMIN", $this->getUser()->getRoles())) {
-                return $this->render('@User/Dashboard/indexAdmin.html.twig');
+                return $this->redirectToRoute('indexAdmin');
             } else {
-                return $this->render('@User/Dashboard/test.html.twig');            }
-
+                return $this->redirectToRoute('album');            }
 
 
         }

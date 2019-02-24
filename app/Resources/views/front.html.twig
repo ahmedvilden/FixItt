@@ -28,10 +28,10 @@
 
     {% endblock %}
 </head>
+{% if app.user != null %}
 <body class="tg-login">
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
+{% endif %}
 <!--************************************
         Preloader Start
 *************************************-->
@@ -66,26 +66,26 @@
                         </ul>
                         <div class="tg-themedropdown tg-languagesdropdown">
                             <a href="javascript:void(0);" id="tg-languages" class="tg-btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <em><img src={{ asset('images/flags/img-01.jpg') }} alt="image description"></em>
+                                <em><img src="{{ asset('images/flags/img-01.jpg') }}" alt="image description"></em>
                                 <span>eng</span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="tg-dropdownmenu" aria-labelledby="tg-languages">
                                 <li>
                                     <a href="#">
-                                        <em><img src={{ asset('images/flags/img-02.jpg') }} alt="image description"></em>
+                                        <em><img src="{{ asset('images/flags/img-02.jpg') }}" alt="image description"></em>
                                         <span>chi</span>
                                     </a>
                                 </li>
                                 <li class="tg-active">
                                     <a href="#">
-                                        <em><img src={{ asset('images/flags/img-03.jpg') }} alt="image description"></em>
+                                        <em><img src="{{ asset('images/flags/img-03.jpg') }}" alt="image description"></em>
                                         <span>eng</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <em><img src={{ asset('images/flags/img-04.jpg') }} alt="image description"></em>
+                                        <em><img src="{{ asset('images/flags/img-04.jpg') }}" alt="image description"></em>
                                         <span>rus</span>
                                     </a>
                                 </li>
@@ -100,129 +100,45 @@
                                 <div class="tg-themedropdown tg-userdropdown">
                                     <a href="javascript:void(0);" id="tg-usermenu" class="tg-btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <em><img src={{ asset('images/thumbnails/img-01.jpg') }} alt="image description"></em>
-                                        <span>Hi! Kena Maresca</span>
+
+                                        <span>Hi! {{ app.user.username }}</span>
                                         <i class="fa fa-angle-down"></i>
                                     </a>
                                     <div class="tg-dropdownmenu tg-usermenu" aria-labelledby="tg-usermenu">
                                         <nav id="tg-dashboardnav" class="tg-dashboardnav">
                                             <ul>
                                                 <li>
-                                                    <a href="dashboard.html">
+                                                    <a href="{{ path('profilehomepage') }}">
                                                         <i class="lnr lnr-database"></i>
-                                                        <span>Insights</span>
+                                                        <span>Profile home page</span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="dashboardprofilesetting.html">
+                                                    <a href="{{ path('album') }}">
+                                                        <i class="lnr lnr-database"></i>
+                                                        <span>Votre Album Photo</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ path('showPost') }}">
+                                                        <i class="lnr lnr-database"></i>
+                                                        <span>Your Posts</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ path('paramInfo') }}">
                                                         <i class="lnr lnr-cog"></i>
                                                         <span>Profile Settings</span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="dashboardbusinesshours.html">
-                                                        <i class="lnr lnr-clock"></i>
-                                                        <span>Business Hours</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="dashboardmanageservice.html">
-                                                        <i class="lnr lnr-briefcase"></i>
-                                                        <span>Manage Services</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="dashboardmanageteams.html">
-                                                        <i class="lnr lnr-users"></i>
-                                                        <span>Manage Team</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="dashboardmanagejobs.html">
-                                                        <i class="lnr lnr-map"></i>
-                                                        <span>Manage Jobs</span>
-                                                    </a>
-                                                </li>
-                                                <li class="tg-privatemessages tg-hasdropdown">
-                                                    <a id="tg-btntoggle" class="tg-btntoggle" href="javascript:void(0);">
-                                                        <i class="lnr lnr-envelope"></i>
-                                                        <span>Private Messages</span>
-                                                        <em class="tg-totalmessages">526</em>
-                                                        <em class="tg-newmessages">1</em>
-                                                    </a>
-                                                    <ul class="tg-emailmenu">
-                                                        <li class="tg-active">
-                                                            <a href="dashboardprivatemessages.html">
-                                                                <span>inbox</span>
-                                                                <em class="tg-totalmessages">526</em>
-                                                                <em class="tg-newmessages">1</em>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="dashboardprivatemessages.html">
-                                                                <span>sent</span>
-                                                                <em class="tg-totalmessages">370</em>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="dashboardprivatemessages.html">
-                                                                <span>trash</span>
-                                                                <em class="tg-totalmessages">160</em>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="dashboardprivatemessages.html">
-                                                                <span>spam/junk</span>
-                                                                <em class="tg-totalmessages">1260</em>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="dashboardappointment.html">
-                                                        <i class="lnr lnr-calendar-full"></i>
-                                                        <span>Appointments</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="dashboardappointmentsetting.html">
-                                                        <i class="lnr lnr-calendar-full"></i>
-                                                        <span>Appointment Settings</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="dashboardfavoritlisting.html">
-                                                        <i class="lnr lnr-heart"></i>
-                                                        <span>Favourite Listings</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="dashboardinvoices.html">
-                                                        <i class="lnr lnr-list"></i>
-                                                        <span>Invoices</span>
-                                                        <em class="tg-invoices">23</em>
-                                                    </a>
-                                                </li>
-                                                <li class="tg-updatepackage">
-                                                    <a href="dashboardupgradepackage.html">
-                                                        <i class="lnr lnr-layers"></i>
-                                                        <span>Update Package</span>
-                                                        <em class="lnr lnr-flag tg-taginfo"></em>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="dashboardsecuritysetting.html">
-                                                        <i class="lnr lnr-construction"></i>
-                                                        <span>Security Settings</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="dashboardprivacysetting.html">
+                                                    <a href="{{ path('ChangePassword') }}">
                                                         <i class="lnr lnr-lock"></i>
                                                         <span>Privacy Settings</span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">
+                                                    <a href="{{ path('fos_user_security_logout') }}">
                                                         <i class="lnr lnr-exit"></i>
                                                         <span>Logout</span>
                                                     </a>

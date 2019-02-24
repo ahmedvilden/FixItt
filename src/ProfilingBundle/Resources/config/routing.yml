@@ -16,3 +16,30 @@ updatePost:
 tag:
     resource: "@ProfilingBundle/Controller/"
     type: annotation
+paramInfo:
+    path:     /parametres
+    defaults: { _controller: ProfilingBundle:Profile:paramInfo }
+autreprofile:
+    path:     /autre/{id}
+    defaults: { _controller: ProfilingBundle:Profile:autreprofile }
+autrealbum:
+    path:     /autrealbum/{id}
+    defaults: { _controller: ProfilingBundle:Profile:autrealbum }
+photoProfil:
+    path:     /photoProfil
+    defaults: { _controller: ProfilingBundle:Profile:updatepic }
+ChangePassword:
+    path:     /changepassword
+    defaults: { _controller: fos_user.change_password.controller:changePasswordAction }
+DemandeSalarie:
+    path:     /demandesalarie
+    defaults: { _controller: ProfilingBundle:Profile:demandesalarie }
+AfficherDemandeSalarie:
+    path:     /admin/afficherdemandesalarie
+    defaults: { _controller: ProfilingBundle:Profile:AfficherDemandeSalarie }
+TraiterDemande:
+    path:     /admin/traiterdemande/{id}
+    defaults: { _controller: ProfilingBundle:Profile:traiterdemande }
+AfficherSalarie:
+    path:     /admin/salaries/{id}
+    defaults: { _controller: ProfilingBundle:Profile:AfficherSalarie }

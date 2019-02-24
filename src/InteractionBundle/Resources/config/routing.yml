@@ -1,3 +1,9 @@
 interaction_homepage:
     path:     /
     defaults: { _controller: InteractionBundle:Default:index }
+addAvis:
+    path:     /addavis
+    defaults: { _controller: InteractionBundle:Interaction:Avis }
+showAvis:
+    path:     /showavis
+    defaults: { _controller: InteractionBundle:Interaction:showAvis }
