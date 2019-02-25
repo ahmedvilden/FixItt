@@ -343,4 +343,126 @@ class User extends BaseUser
     {
         return $this->salarie;
     }
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="salaire", type="integer",nullable=true)
+     */
+    private $salaire;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="JoursTravail", type="string", length=255,nullable=true)
+     */
+    private $joursTravail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="HDebut", type="string", length=255,nullable=true)
+     */
+    private $hDebut;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="HFin", type="string", length=255,nullable=true)
+     */
+    private $hFin;
+    /**
+     * Set salaire
+     *
+     * @param integer $salaire
+     *
+     * @return User
+     */
+    public function setSalaire($salaire)
+    {
+        $this->salaire = $salaire;
+
+        return $this;
+    }
+
+    /**
+     * Get salaire
+     *
+     * @return int
+     */
+    public function getSalaire()
+    {
+        return $this->salaire;
+    }
+
+    /**
+     * Set joursTravail
+     *
+     * @param string $joursTravail
+     *
+     * @return User
+     */
+    public function setJoursTravail($joursTravail)
+    {
+        $this->joursTravail = $joursTravail;
+
+        return $this;
+    }
+
+    /**
+     * Get joursTravail
+     *
+     * @return string
+     */
+    public function getJoursTravail()
+    {
+        return $this->joursTravail;
+    }
+
+    /**
+     * Set hDebut
+     *
+     * @param string $hDebut
+     *
+     * @return User
+     */
+    public function setHDebut($hDebut)
+    {
+        $this->hDebut = $hDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get hDebut
+     *
+     * @return string
+     */
+    public function getHDebut()
+    {
+        return $this->hDebut;
+    }
+
+    /**
+     * Set hFin
+     *
+     * @param string $hFin
+     *
+     * @return User
+     */
+    public function setHFin($hFin)
+    {
+        $this->hFin = $hFin;
+
+        return $this;
+    }
+
+    /**
+     * Get hFin
+     *
+     * @return string
+     */
+    public function getHFin()
+    {
+        return $this->hFin;
+    }
 }

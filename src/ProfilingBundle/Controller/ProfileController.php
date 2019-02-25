@@ -3,8 +3,10 @@
 namespace ProfilingBundle\Controller;
 
 use ProfilingBundle\Entity\Album;
+use ProfilingBundle\Entity\CommentairePost;
 use ProfilingBundle\Entity\DemandeS;
 use ProfilingBundle\Entity\Post;
+use ProfilingBundle\Form\CommentairePostType;
 use ProfilingBundle\Form\DemandeSType;
 use ProfilingBundle\Form\PostType;
 use ProfilingBundle\Repository\PostRepository;
@@ -53,7 +55,7 @@ class ProfileController extends Controller
             return $this->redirectToRoute('album');
         }
         //-------------------supprimer photo
-        /*if ($request->isMethod('POST')) {
+        if($request->isMethod('POST')) {
             if ($request->request->has('idp')) {
                 $p= $em->getRepository(Album::class)->find($request->get("idp"));
                 $em->remove($p);
@@ -61,7 +63,7 @@ class ProfileController extends Controller
                 return $this->redirectToRoute("album");
             }
             return $this->redirectToRoute('album');
-        }*/
+        }
         //----------------------------------
 
         $photos = $em->getRepository(Album::class)->findBy(array('user' => $u->getId()), array('datePublication' => 'ASC'));
@@ -136,17 +138,18 @@ class ProfileController extends Controller
 
         $u = $this->container->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
+        $comments=$em->getRepository(CommentairePost::class)->findAll();
 
 
         if ($tag = $request->query->get('tag')) {
             $recent = $em->getRepository(Post::class)->findByTag($tag)->getResult();
         } else {
             $recent = $em->getRepository(Post::class)->findBy(array('user' => $u), array('datePublication' => 'DESC'));
-            return $this->render("@Profiling/showPost.html.twig", array("recent" => $recent));
+            return $this->render("@Profiling/showPost.html.twig", array("recent" => $recent,"comments"=>$comments));
         }
 
         return $this->render('@Profiling/showPost.html.twig', array(
-            "recent" => $recent, "curr_user" => $u
+            "recent" => $recent, "curr_user" => $u,"comments"=>$comments
         ));
     }
 
@@ -295,16 +298,65 @@ class ProfileController extends Controller
             'demande' => $demande
         ));
     }
-    public function AfficherSalarieAction($id){
+    public function AfficherSalarieAction($idu,$idd){
         $em=$this->getDoctrine()->getManager();
-        $accepter=$em->getRepository(User::class)->find($id);
+        $demande=$em->getRepository(DemandeS::class)->find($idd);
+        $accepter=$em->getRepository(User::class)->find($idu);
+        $em->remove($demande);
         $un=1;
         $accepter->setSalarie($un);
         $em->persist($accepter);
         $em->flush();
+        $this->redirectToRoute('AfficherS');
+    }
+    public function RefuserDemandeAction($idd){
+        $em=$this->getDoctrine()->getManager();
+        $demande=$em->getRepository(DemandeS::class)->find($idd);
+        $em->remove($demande);
+        $em->flush();
+        $this->redirectToRoute('AfficherS');
+    }
+    public function AfficherSaAction(){
+        $em=$this->getDoctrine()->getManager();
         $salarie = $em->getRepository(User::class)->findsalarie();
         return $this->render('@Profiling/AfficherSalarie.html.twig', array(
             'salarie' => $salarie
         ));
+    }
+    public function GererSalarierAction(Request $request,$id){
+        $em=$this->getDoctrine()->getManager();
+        $salarier=$em->getRepository(User::class)->find($id);
+        if($request->isMethod('POST')){
+            $salarier->setSalaire($request->get('salaire'));
+            $salarier->setJoursTravail($request->get('jours'));
+            $salarier->setHDebut($request->get('nbhd'));
+            $salarier->setHFin($request->get('nbhf'));
+            $em->persist($salarier);
+            $em->flush();
+            return $this->redirectToRoute('AfficherS');
+        }
+        return $this->render('@Profiling/GererSalarier.html.twig', array(
+            'salarier' => $salarier
+        ));
+    }
+
+
+
+
+    public function PosterCommentaireAction(Request $request,$idp,$idu){
+        $em=$this->getDoctrine()->getManager();
+        $commentaire= new CommentairePost();
+        $user=$em->getRepository(User::class)->find($idu);
+        $post=$em->getRepository(Post::class)->find($idp);
+        if($request->isMethod('POST')){
+        $taw=new \DateTime('now');
+            $commentaire->setDateCommentaire($taw);
+        $commentaire->setUser($user);
+        $commentaire->setPost($post);
+        $commentaire->setContenu($request->get('contenu'));
+        $em->persist($commentaire);
+        $em->flush();
+        }
+        return $this->redirectToRoute('showPost');
     }
 }

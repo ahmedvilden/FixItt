@@ -40,6 +40,18 @@ AfficherDemandeSalarie:
 TraiterDemande:
     path:     /admin/traiterdemande/{id}
     defaults: { _controller: ProfilingBundle:Profile:traiterdemande }
+RefuserDemande:
+    path:     /admin/refuserdemande/{idd}
+    defaults: { _controller: ProfilingBundle:Profile:RefuserDemande }
 AfficherSalarie:
-    path:     /admin/salaries/{id}
+    path:     /admin/salaries/{idu}/{idd}
     defaults: { _controller: ProfilingBundle:Profile:AfficherSalarie }
+AfficherS:
+    path:     /admin/listeSa
+    defaults: { _controller: ProfilingBundle:Profile:AfficherSa }
+GererSalarier:
+    path:     /admin/gerersalarier/{id}
+    defaults: { _controller: ProfilingBundle:Profile:GererSalarier }
+AjouterCommentaire:
+    path:     /ajoutercommentaire/{idp}/{idu}
+    defaults: { _controller: ProfilingBundle:Profile:PosterCommentaire }

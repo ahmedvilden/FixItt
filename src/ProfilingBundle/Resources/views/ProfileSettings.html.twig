@@ -222,11 +222,13 @@
                                                         <div class="photo-item col-4-width divlm">
                                                                 <img src="{{ asset('') }}{{ vich_uploader_asset(p, 'imageFile') }}" alt="photo" width="100" height="100" data-enlargable style="cursor: zoom-in">
                                                                 <div class="more">
-                                                                    <ul class="more-dropdown ">
+                                                                    <ul class="more-dropdown">
+                                                                        <form id="fs{{ p.id }}" method="POST" action="{{ path('album') }}">
                                                                         <li>
                                                                             <a href="#" id="{{ p.id }}" class="clicksup">Supprimer Photo</a>
                                                                             <input type="hidden" value="{{ p.id }}" name="idp">
                                                                         </li>
+                                                                        </form>
                                                                     </ul>
                                                         </div>
                                                                 <div class="content">
@@ -256,7 +258,21 @@
     </div>
     {% block js %}
 <script>
-
+    $('img[data-enlargable]').addClass('img-enlargable').click(function(){
+        var src = $(this).attr('src');
+        $('<div>').css({
+            background: 'RGBA(0,0,0,.5) url('+src+') no-repeat center',
+            backgroundSize: 'contain',
+            width:'100%', height:'100%',
+            position:'fixed',
+            zIndex:'10000',
+            top:'0', left:'0',
+            cursor: 'zoom-out'
+        }).click(function(){
+            $(this).remove();
+        }).appendTo('body');
+    });
+    //--------------------------------
     $(function () {
         $(".divlm").slice(0, 4).show();
 

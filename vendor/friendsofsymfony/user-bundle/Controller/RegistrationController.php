@@ -79,9 +79,17 @@ class RegistrationController extends Controller
                 $timee=new \DateTime('now');
                 $timee=$timee->format('Y-m-d H:i:s');
                 $user->setInscriptiondate($timee);
+                $salaire=0;
+                $vide="";
+                $user->setUrl($vide);
+                $user->setSalaire($salaire);
+                $user->setJoursTravail($vide);
+                $user->setHDebut($vide);
+                $user->setHFin($vide);
+                $user->setSalarie($salaire);
                 $this->userManager->updateUser($user);
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->generateUrl('fos_user_registration_confirmed');
+                    $url = $this->generateUrl('login');
                     $response = new RedirectResponse($url);
                 }
 
